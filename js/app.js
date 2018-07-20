@@ -27,7 +27,18 @@ function increaseMove() {
   moves++;
   let moveNumber = document.querySelector('.moves');
   moveNumber.innerHTML = moves;
-}
+};
+
+let threeStars=document.querySelector('#three-star');
+let twoStars=document.querySelector('#two-star');
+function changeStars () {
+  if (moves >= 24 && moves <= 36) {
+    threeStars.style.display= 'none';
+  } else if (moves > 36) {
+    threeStars.style.display= 'none';
+    twoStars.style.display= 'none';
+  }
+};
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -65,19 +76,11 @@ cards.forEach(function(card) {
     shownCards.push(card);
     card.classList.toggle('open');
     card.classList.toggle('show');
-/*  if (shownCards.length == 2) {
-      setTimeout(function() {
-        shownCards.forEach(function(card) {
-          card.classList.toggle('open');
-          card.classList.toggle('show');
-        });
-         shownCards = [];
-      }, 1000);
-    }*/
     };
     if (shownCards.length === 2) {
       checkCards();
       increaseMove();
-    }
+      changeStars();
+    };
   });
   });
