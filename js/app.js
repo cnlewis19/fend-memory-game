@@ -34,15 +34,32 @@ function shuffle(array) {
  */
 const cards = document.querySelectorAll('.card');
 let shownCards = [];
+function checkCards() {
+  if (
+    shownCards[0].firstElementChild.className=== shownCards[1].firstElementChild.className
+  )
+  {
+    shownCards[0].classList.toggle('match');
+    shownCards[1].classList.toggle('match');
+    shownCards=[];
+  } else {
+    setTimeout (function() {
+    shownCards[0].classList.toggle('open');
+    shownCards[0].classList.toggle('show');
+    shownCards[1].classList.toggle('open');
+    shownCards[1].classList.toggle('show');
+    shownCards = [];
+    }, 1000);
+  }
+}
 
 cards.forEach(function(card) {
   card.addEventListener('click', function(openingCards) {
-    if (!card.classList.contains('open') || !card.classList.contains('show')) {
+    if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match') && shownCards.length < 2){
     shownCards.push(card);
     card.classList.toggle('open');
     card.classList.toggle('show');
-
-    if (shownCards.length == 2) {
+/*  if (shownCards.length == 2) {
       setTimeout(function() {
         shownCards.forEach(function(card) {
           card.classList.toggle('open');
@@ -50,7 +67,10 @@ cards.forEach(function(card) {
         });
          shownCards = [];
       }, 1000);
-      }
+    }*/
     };
+    if (shownCards.length === 2) {
+      checkCards();
+    }
   });
   });
