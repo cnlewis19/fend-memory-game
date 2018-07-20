@@ -1,6 +1,11 @@
+let deck = document.querySelector('.deck');
+
 function shuffleGrid() {
-  let gameCards = Array.from(document.querySelectorAll(.deck li));
+  let gameCards = Array.from(document.querySelectorAll('.deck li'));
   let cardsShuffled = shuffle(gameCards);
+  for (card of cardsShuffled) {
+    deck.appendChild(card);
+  }
 }
 shuffleGrid();
 // Shuffle function from http://stackoverflow.com/a/2450976
