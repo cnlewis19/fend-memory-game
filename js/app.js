@@ -33,10 +33,24 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 const cards = document.querySelectorAll('.card');
+let shownCards = [];
 
 cards.forEach(function(card) {
-  card.addEventListener('click', function(test) {
+  card.addEventListener('click', function(openingCards) {
+    if (!card.classList.contains('open') || !card.classList.contains('show')) {
+    shownCards.push(card);
     card.classList.toggle('open');
     card.classList.toggle('show');
+
+    if (shownCards.length == 2) {
+      setTimeout(function() {
+        shownCards.forEach(function(card) {
+          card.classList.toggle('open');
+          card.classList.toggle('show');
+        });
+         shownCards = [];
+      }, 1000);
+      }
+    };
   });
-});
+  });
