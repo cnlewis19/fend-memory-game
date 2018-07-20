@@ -1,5 +1,4 @@
 let deck = document.querySelector('.deck');
-
 function shuffleGrid() {
   let gameCards = Array.from(document.querySelectorAll('.deck li'));
   let cardsShuffled = shuffle(gameCards);
@@ -23,7 +22,12 @@ function shuffle(array) {
     return array;
 }
 
-
+let moves = 0;
+function increaseMove() {
+  moves++;
+  let moveNumber = document.querySelector('.moves');
+  moveNumber.innerHTML = moves;
+}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -73,6 +77,7 @@ cards.forEach(function(card) {
     };
     if (shownCards.length === 2) {
       checkCards();
+      increaseMove();
     }
   });
   });
