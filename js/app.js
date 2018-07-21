@@ -29,6 +29,8 @@ function increaseMove() {
   moveNumber.innerHTML = moves;
 };
 
+
+
 let threeStars=document.querySelector('#three-star');
 let twoStars=document.querySelector('#two-star');
 let oneStar=document.querySelector('#one-star');
@@ -80,7 +82,6 @@ function clockSequence(){
     clockRunning = true;
   };
 }
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -98,9 +99,7 @@ function clockSequence(){
  function writeModalStats() {
    const timeStat = document.querySelector('.win-time');
    const finalMoves = document.querySelector('.win-moves');
-   const finalStars = document.querySelector('.win-stars');
    timeStat.innerHTML = `Time: ${clockTime}`;
-   finalStars.innerHTML = `Stars: ${oneStar} ${twoStars} ${threeStars}`;
    finalMoves.innerHTML = `Moves: ${moves}`;
 
  }
@@ -144,9 +143,9 @@ cards.forEach(function(card) {
     card.classList.toggle('show');
     };
     if (shownCards.length === 2) {
-      checkCards();
       increaseMove();
       changeStars();
+      checkCards();
     };
   });
   });
