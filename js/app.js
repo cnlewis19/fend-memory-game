@@ -1,3 +1,4 @@
+//Shuffles grid each time the page is refreshed or replay is hit
 let deck = document.querySelector('.deck');
 function shuffleGrid() {
   let gameCards = Array.from(document.querySelectorAll('.deck li'));
@@ -22,6 +23,7 @@ function shuffle(array) {
     return array;
 }
 
+//Counts number of moves and displays it on page
 let moves = 0;
 function increaseMove() {
   moves++;
@@ -29,7 +31,7 @@ function increaseMove() {
   moveNumber.innerHTML = moves;
 };
 
-
+//Displays stars based on number of moves
 function hideStar() {
   const stars= document.querySelectorAll('.stars li');
   for (star of stars) {
@@ -55,7 +57,7 @@ function changeStars () {
   };
 }
 
-
+//Adds timer functionality
 let clock = document.querySelector('.clock');
 let sec = 0;
 let min = 0;
@@ -95,16 +97,8 @@ function clockSequence(){
     clockRunning = true;
   };
 }
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+
+//sets up modal box
  const modal = document.getElementById('win-box');
  const close = document.getElementsByClassName('close')[0];
  const cancel = document.getElementsByClassName('cancel');
@@ -112,8 +106,10 @@ function clockSequence(){
 function toggleModal() {
   modal.classList.toggle('hide');
 }
+//makes modal off the default
 toggleModal();
 
+//gets stats for the modal
  function writeModalStats() {
    const timeStat = document.querySelector('.win-time');
    const finalMoves = document.querySelector('.win-moves');
@@ -123,15 +119,18 @@ toggleModal();
    finalMoves.innerHTML = `Moves: ${moves}`;
 
  }
+ //closes modal if user clicks cancel
+ document.querySelector('.cancel').addEventListener('click', () => {
+   toggleModal();
+ });
+
+ //function to run when the game is won
  function gameWon() {
    clockStop();
    writeModalStats();
    toggleModal();
  }
- document.querySelector('.cancel').addEventListener('click', () => {
-   toggleModal();
- });
- 
+//sets up card matching scenarios
 const cards = document.querySelectorAll('.card');
 let shownCards = [];
 let matched = 0;
@@ -154,10 +153,12 @@ function checkCards() {
     shownCards = [];
   }, 1000);
   }
+  //determines if game has been won
   if (matched ===TOTAL_PAIRS) {
     gameWon();
   }
 }
+//sets up flipping and runs matching check if two cards have been flipped
 cards.forEach(function(card) {
   card.addEventListener('click', function(openingCards) {
     clockSequence();
