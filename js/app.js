@@ -30,18 +30,31 @@ function increaseMove() {
 };
 
 
-
-let threeStars=document.querySelector('#three-star');
-let twoStars=document.querySelector('#two-star');
-let oneStar=document.querySelector('#one-star');
-function changeStars () {
-  if (moves >= 24 && moves <= 36) {
-    threeStars.style.display= 'none';
-  } else if (moves > 36) {
-    threeStars.style.display= 'none';
-    twoStars.style.display= 'none';
+function hideStar() {
+  const stars= document.querySelectorAll('.stars li');
+  for (star of stars) {
+    if (star.style.display !== 'none') {
+    star.style.display = 'none';
+    break;
   }
-};
+}
+}
+let starCount;
+function changeStars () {
+  if (moves == 24) {
+    hideStar();
+  } else if (moves == 36) {
+    hideStar();
+  };
+  if (moves < 24){
+    starCount = 3;
+  } else if (moves >=24 && moves <36) {
+    starCount = 2;
+  } else {
+    starCount = 1;
+  };
+}
+
 
 let clock = document.querySelector('.clock');
 let sec = 0;
@@ -92,22 +105,30 @@ function clockSequence(){
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
- var modal = document.getElementById('win-box');
- var span = document.getElementsByClassName('close')[0];
+ const modal = document.getElementById('win-box');
+ const close = document.getElementsByClassName('close')[0];
+ const cancel = document.getElementsByClassName('cancel');
 
+function toggleModal() {
+  modal.classList.toggle('hide');
+}
+toggleModal();
 
  function writeModalStats() {
    const timeStat = document.querySelector('.win-time');
    const finalMoves = document.querySelector('.win-moves');
+   const finalStars = document.querySelector ('.win-stars')
    timeStat.innerHTML = `Time: ${clockTime}`;
+   finalStars.innerHTML = `Stars: ${starCount}`;
    finalMoves.innerHTML = `Moves: ${moves}`;
 
  }
  function gameWon() {
    clockStop();
    writeModalStats();
-   modal.style.display= "block";
+   toggleModal();
  }
+
 const cards = document.querySelectorAll('.card');
 let shownCards = [];
 let matched = 0;
