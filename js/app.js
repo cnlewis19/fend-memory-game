@@ -31,6 +31,7 @@ function increaseMove() {
 
 let threeStars=document.querySelector('#three-star');
 let twoStars=document.querySelector('#two-star');
+let oneStar=document.querySelector('#one-star');
 function changeStars () {
   if (moves >= 24 && moves <= 36) {
     threeStars.style.display= 'none';
@@ -44,6 +45,7 @@ let clock = document.querySelector('.clock');
 let sec = 0;
 let min = 0;
 let time;
+let clockTime;
 let clockRunning = false;
 
 function clockRun() {
@@ -67,31 +69,17 @@ function showTime() {
     min++;
     sec = "00";
   }
-  clock.innerHTML = min + ":" + sec;
+  clockTime = min + ":" + sec;
+  clock.innerHTML = clockTime;
 }
 
 function clockSequence(){
-  if (moves===1) {
+  if (moves<=1) {
     clockRun();
     showTime();
     clockRunning = true;
   };
 }
-
-/*let time = 0;
-let clockStop = true;
-let clock = document.querySelector('.clock');
-
-function showTime() {
-  clock.innerHTML = time;
-}
-
-function startClock() {
-  let clockTime = setInterval(() => {
-    time++;
-  }, 1000);
-} */
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -103,8 +91,28 @@ function startClock() {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+ var modal = document.getElementById('win-box');
+ var span = document.getElementsByClassName('close')[0];
+
+
+ function writeModalStats() {
+   const timeStat = document.querySelector('.win-time');
+   const finalMoves = document.querySelector('.win-moves');
+   const finalStars = document.querySelector('.win-stars');
+   timeStat.innerHTML = `Time: ${clockTime}`;
+   finalStars.innerHTML = `Stars: ${oneStar} ${twoStars} ${threeStars}`;
+   finalMoves.innerHTML = `Moves: ${moves}`;
+
+ }
+ function gameWon() {
+   clockStop();
+   writeModalStats();
+   modal.style.display= "block";
+ }
 const cards = document.querySelectorAll('.card');
 let shownCards = [];
+let matched = 0;
+const TOTAL_PAIRS = 8;
 function checkCards() {
   if (
     shownCards[0].firstElementChild.className=== shownCards[1].firstElementChild.className
@@ -113,6 +121,7 @@ function checkCards() {
     shownCards[0].classList.toggle('match');
     shownCards[1].classList.toggle('match');
     shownCards=[];
+    matched++;
   } else {
     setTimeout (function() {
     shownCards[0].classList.toggle('open');
@@ -121,6 +130,9 @@ function checkCards() {
     shownCards[1].classList.toggle('show');
     shownCards = [];
   }, 1000);
+  }
+  if (matched ===TOTAL_PAIRS) {
+    gameWon();
   }
 }
 cards.forEach(function(card) {
