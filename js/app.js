@@ -39,6 +39,60 @@ function changeStars () {
     twoStars.style.display= 'none';
   }
 };
+
+let clock = document.querySelector('.clock');
+let sec = 0;
+let min = 0;
+let time;
+let clockRunning = false;
+
+function clockRun() {
+  if (clockRunning == false) {
+    time = setInterval (showTime, 1000);
+    timeRunning = true;
+  }
+}
+function clockStop() {
+  clearInterval(time);
+  sec = 0;
+  min = 0;
+  clockRunning = false;
+}
+function showTime() {
+  sec ++;
+  if (sec <10) {
+    sec = `0${sec}`;
+  }
+  if (sec >=60) {
+    min++;
+    sec = "00";
+  }
+  clock.innerHTML = min + ":" + sec;
+}
+
+function clockSequence(){
+  if (moves===1) {
+    clockRun();
+    showTime();
+    clockRunning = true;
+  };
+}
+
+/*let time = 0;
+let clockStop = true;
+let clock = document.querySelector('.clock');
+
+function showTime() {
+  clock.innerHTML = time;
+}
+
+function startClock() {
+  let clockTime = setInterval(() => {
+    time++;
+  }, 1000);
+} */
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -66,12 +120,12 @@ function checkCards() {
     shownCards[1].classList.toggle('open');
     shownCards[1].classList.toggle('show');
     shownCards = [];
-    }, 1000);
+  }, 1000);
   }
 }
-
 cards.forEach(function(card) {
   card.addEventListener('click', function(openingCards) {
+    clockSequence();
     if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match') && shownCards.length < 2){
     shownCards.push(card);
     card.classList.toggle('open');
