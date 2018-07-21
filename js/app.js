@@ -128,7 +128,10 @@ toggleModal();
    writeModalStats();
    toggleModal();
  }
-
+ document.querySelector('.cancel').addEventListener('click', () => {
+   toggleModal();
+ });
+ 
 const cards = document.querySelectorAll('.card');
 let shownCards = [];
 let matched = 0;
