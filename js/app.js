@@ -102,9 +102,10 @@ function clockSequence(){
 function resetClock() {
   clockStop();
   clockRunning = false;
-  time = 0;
   showTime();
+  time = 0;
 }
+
 function resetMoves() {
   moves = 0;
   moveNumber.innerHTML = moves;
@@ -112,15 +113,32 @@ function resetMoves() {
 function resetStars() {
   for (star of stars) {
     star.style.display = 'inline';
-  }
+  };
 }
-function replay() {
+function resetCards() {
+  cards.forEach(function(card) {
+    card.classList.remove('open');
+    card.classList.remove('show');
+    card.classList.remove('match');
+  })
+}
+
+function restartGame() {
   resetClock();
   resetMoves();
   resetStars();
   shuffleGrid();
 }
-document.querySelector('.replay').addEventListener('click', replay());
+
+document.querySelector('.restart').addEventListener('click', () => {
+  restartGame();
+});
+
+document.querySelector('.replay').addEventListener('click', () => {
+  restartGame();
+  toggleModal();
+});
+
 //sets up modal box
  const modal = document.getElementById('win-box');
 
