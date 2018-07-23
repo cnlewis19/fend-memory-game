@@ -25,15 +25,15 @@ function shuffle(array) {
 
 //Counts number of moves and displays it on page
 let moves = 0;
+let moveNumber = document.querySelector('.moves');
 function increaseMove() {
   moves++;
-  let moveNumber = document.querySelector('.moves');
   moveNumber.innerHTML = moves;
 };
 
 //Displays stars based on number of moves
+const stars= document.querySelectorAll('.stars li');
 function hideStar() {
-  const stars= document.querySelectorAll('.stars li');
   for (star of stars) {
     if (star.style.display !== 'none') {
     star.style.display = 'none';
@@ -98,11 +98,33 @@ function clockSequence(){
   };
 }
 
+// adding replay functionality
+function resetClock() {
+  clockStop();
+  clockRunning = false;
+  time = 0;
+  showTime();
+}
+function resetMoves() {
+  moves = 0;
+  moveNumber.innerHTML = moves;
+}
+function resetStars() {
+  for (star of stars) {
+    star.style.display = 'inline';
+  }
+}
+function replay() {
+  resetClock();
+  resetMoves();
+  resetStars();
+  shuffleGrid();
+}
+document.querySelector('.replay').addEventListener('click', replay());
 //sets up modal box
  const modal = document.getElementById('win-box');
- const close = document.getElementsByClassName('close')[0];
- const cancel = document.getElementsByClassName('cancel');
 
+//toggles modal on and off
 function toggleModal() {
   modal.classList.toggle('hide');
 }
@@ -119,8 +141,11 @@ toggleModal();
    finalMoves.innerHTML = `Moves: ${moves}`;
 
  }
- //closes modal if user clicks cancel
+ //closes modal if user clicks cancel or close
  document.querySelector('.cancel').addEventListener('click', () => {
+   toggleModal();
+ });
+ document.querySelector('#modal-close-button').addEventListener('click', () => {
    toggleModal();
  });
 
@@ -130,6 +155,7 @@ toggleModal();
    writeModalStats();
    toggleModal();
  }
+
 //sets up card matching scenarios
 const cards = document.querySelectorAll('.card');
 let shownCards = [];
