@@ -97,8 +97,8 @@ function clockSequence(){
     clockRunning = true;
   };
 }
-
 // adding replay functionality
+
 function resetClock() {
   clockStop();
   clockRunning = false;
@@ -124,20 +124,23 @@ function resetCards() {
 }
 
 function restartGame() {
+  shownCards = [];
+  resetCards();
   resetClock();
   resetMoves();
   resetStars();
   shuffleGrid();
 }
-
+function replayGame() {
+  restartGame();
+  toggleModal();
+}
 document.querySelector('.restart').addEventListener('click', () => {
   restartGame();
 });
-
 document.querySelector('.replay').addEventListener('click', () => {
-  restartGame();
-  toggleModal();
-});
+  replayGame();
+})
 
 //sets up modal box
  const modal = document.getElementById('win-box');
@@ -192,8 +195,10 @@ function checkCards() {
     setTimeout (function() {
     shownCards[0].classList.toggle('open');
     shownCards[0].classList.toggle('show');
+    shownCards[0].classList.toggle('no-click');
     shownCards[1].classList.toggle('open');
     shownCards[1].classList.toggle('show');
+    shownCards[1].classList.toggle('no-click');
     shownCards = [];
   }, 1000);
   }
@@ -205,6 +210,7 @@ function checkCards() {
 //sets up flipping and runs matching check if two cards have been flipped
 cards.forEach(function(card) {
   card.addEventListener('click', function(openingCards) {
+    card.classList.toggle('no-click');
     clockSequence();
     if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match') && shownCards.length < 2){
     shownCards.push(card);

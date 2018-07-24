@@ -132,3 +132,6 @@ h1 {
   float: right;
   font-size: 28px;
 }
+.no-click {
+  pointer-events: none;
+}
