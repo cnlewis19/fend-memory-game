@@ -122,6 +122,7 @@ function resetCards() {
     card.classList.remove('open');
     card.classList.remove('show');
     card.classList.remove('match');
+    card.classList.remove('no-click');
   })
 }
 
@@ -136,11 +137,15 @@ function restartGame() {
 function replayGame() {
   restartGame();
   toggleModal();
+  matched = 0;
 }
 document.querySelector('.restart').addEventListener('click', () => {
   restartGame();
 });
 
+document.querySelector('.replay').addEventListener('click', () => {
+  replayGame();
+});
 //sets up modal box
  const modal = document.getElementById('win-box');
 
@@ -190,6 +195,7 @@ function checkCards() {
     shownCards[1].classList.toggle('match');
     shownCards=[];
     matched++;
+    deck.classList.toggle('no-click');
   } else {
     setTimeout (function() {
     shownCards[0].classList.toggle('open');
@@ -199,6 +205,7 @@ function checkCards() {
     shownCards[1].classList.toggle('show');
     shownCards[1].classList.toggle('no-click');
     shownCards = [];
+    deck.classList.toggle('no-click');
   }, 1000);
   }
   //determines if game has been won
@@ -207,6 +214,7 @@ function checkCards() {
   }
 }
 //sets up flipping and runs matching check if two cards have been flipped
+
 cards.forEach(function(card) {
   card.addEventListener('click', function(openingCards) {
     card.classList.toggle('no-click');
@@ -220,9 +228,7 @@ cards.forEach(function(card) {
       increaseMove();
       changeStars();
       checkCards();
+      deck.classList.toggle('no-click');
     };
   });
   });
-  document.querySelector('.replay').addEventListener('click', () => {
-    replayGame();
-  })
