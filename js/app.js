@@ -101,9 +101,11 @@ function clockSequence(){
 
 function resetClock() {
   clockStop();
-  clockRunning = false;
-  showTime();
+  timeRunning = false;
   time = 0;
+  sec = 0;
+  min = 0;
+  clock.innerHTML = '0:00';
 }
 
 function resetMoves() {
@@ -138,9 +140,6 @@ function replayGame() {
 document.querySelector('.restart').addEventListener('click', () => {
   restartGame();
 });
-document.querySelector('.replay').addEventListener('click', () => {
-  replayGame();
-})
 
 //sets up modal box
  const modal = document.getElementById('win-box');
@@ -216,7 +215,7 @@ cards.forEach(function(card) {
     shownCards.push(card);
     card.classList.toggle('open');
     card.classList.toggle('show');
-    };
+  };
     if (shownCards.length === 2) {
       increaseMove();
       changeStars();
@@ -224,3 +223,6 @@ cards.forEach(function(card) {
     };
   });
   });
+  document.querySelector('.replay').addEventListener('click', () => {
+    replayGame();
+  })
