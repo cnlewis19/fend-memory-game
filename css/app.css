@@ -67,7 +67,7 @@ h1 {
 
 .deck .card.open {
     transform: rotateY(0);
-    background: #9877C5;
+    background: #9877c5;
     cursor: default;
 }
 
@@ -79,6 +79,10 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+}
+
+.no-click {
+  pointer-events: none;
 }
 
 /*
@@ -101,15 +105,16 @@ h1 {
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
-    color: #9877C5;
+    color: #9877c5;
 }
 
 .score-panel .restart {
     float: right;
     cursor: pointer;
-    color: #9877C5;
+    color: #9877c5;
 }
 
+/* Styles for Modal */
 .dialog-box {
   position: fixed;
   z-index: 1;
@@ -119,9 +124,11 @@ h1 {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
 }
+
 .hide {
   display: none;
 }
+
 .win-box-content {
   background-color: #ffffff;
   margin: 15% auto;
@@ -129,11 +136,9 @@ h1 {
   width: 50%;
   text-align: center;
 }
+
 .close {
   color: #aaa;
   float: right;
   font-size: 28px;
-}
-.no-click {
-  pointer-events: none;
 }

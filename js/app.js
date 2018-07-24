@@ -8,6 +8,8 @@ function shuffleGrid() {
   }
 }
 shuffleGrid();
+
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -23,6 +25,7 @@ function shuffle(array) {
     return array;
 }
 
+
 //Counts number of moves and displays it on page
 let moves = 0;
 let moveNumber = document.querySelector('.moves');
@@ -30,6 +33,7 @@ function increaseMove() {
   moves++;
   moveNumber.innerHTML = moves;
 };
+
 
 //Displays stars based on number of moves
 const stars= document.querySelectorAll('.stars li');
@@ -47,7 +51,7 @@ function changeStars () {
     hideStar();
   } else if (moves == 36) {
     hideStar();
-  };
+};
   if (moves < 24){
     starCount = 3;
   } else if (moves >=24 && moves <36) {
@@ -56,6 +60,7 @@ function changeStars () {
     starCount = 1;
   };
 }
+
 
 //Adds timer functionality
 let clock = document.querySelector('.clock');
@@ -97,6 +102,8 @@ function clockSequence(){
     clockRunning = true;
   };
 }
+
+
 // adding replay functionality
 
 function resetClock() {
@@ -146,15 +153,23 @@ document.querySelector('.restart').addEventListener('click', () => {
 document.querySelector('.replay').addEventListener('click', () => {
   replayGame();
 });
+
+
 //sets up modal box
  const modal = document.getElementById('win-box');
+
+
 
 //toggles modal on and off
 function toggleModal() {
   modal.classList.toggle('hide');
 }
+
+
 //makes modal off the default
 toggleModal();
+
+
 
 //gets stats for the modal
  function writeModalStats() {
@@ -166,6 +181,8 @@ toggleModal();
    finalMoves.innerHTML = `Moves: ${moves}`;
 
  }
+
+
  //closes modal if user clicks cancel or close
  document.querySelector('.cancel').addEventListener('click', () => {
    toggleModal();
@@ -174,12 +191,14 @@ toggleModal();
    toggleModal();
  });
 
+
  //function to run when the game is won
  function gameWon() {
    clockStop();
    writeModalStats();
    toggleModal();
  }
+
 
 //sets up card matching scenarios
 const cards = document.querySelectorAll('.card');
@@ -213,6 +232,8 @@ function checkCards() {
     gameWon();
   }
 }
+
+
 //sets up flipping and runs matching check if two cards have been flipped
 
 cards.forEach(function(card) {
