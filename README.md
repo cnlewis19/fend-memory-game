@@ -22,6 +22,6 @@ This project is licensed under GNU GPLv3.
 
 ## Acknowledgements
 The following resources were extremely helpful in building this project.
-[Matthew Cranford Memory Game Walkthrough] (https://matthewcranford.com/memory-game-walkthrough-part-1-setup/)
-[Memory Game with Mike Wales] (https://www.youtube.com/watch?v=_rUH-sEs68Y)
-[W3 Schools Tutorial on Modals] (https://www.w3schools.com/howto/howto_css_modals.asp)
+Memory Game Walkthrough by [Matthew Cranford](https://matthewcranford.com/memory-game-walkthrough-part-1-setup/).
+Memory Game [with Mike Wales](https://www.youtube.com/watch?v=_rUH-sEs68Y).
+W3 Schools Tutorial on [Modals](https://www.w3schools.com/howto/howto_css_modals.asp).
